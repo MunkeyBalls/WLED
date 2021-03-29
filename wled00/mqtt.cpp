@@ -161,6 +161,31 @@ void publishMqtt()
   #endif
 }
 
+void publishMqttCustom(std::string irButton)
+{   
+  std::string payloadStr = "on";    
+  const char *payload = payloadStr.c_str();
+  const char *topic = irButton.c_str();
+
+  doPublishMqtt = false;
+  if (!WLED_MQTT_CONNECTED) return;
+
+  DEBUG_PRINTLN(F("Publish MQTT Custom"));
+  char subuf[38];
+
+  strcpy(subuf, mqttDeviceTopic);
+  strcat(subuf, "/");
+  strcat(subuf, "ir");  
+  strcat(subuf, "/");
+  strcat(subuf, topic);
+  DEBUG_PRINTLN(subuf);
+  mqtt->publish(subuf, 0, false, payload);
+
+  payloadStr = "off";    
+  payload = payloadStr.c_str();
+  mqtt->publish(subuf, 0, false, payload);
+
+}
 
 //HA autodiscovery was removed in favor of the native integration in HA v0.102.0
 

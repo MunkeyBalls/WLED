@@ -2,6 +2,8 @@
 
 #include "ir_codes.h"
 
+#include <sstream>
+
 /*
  * Infrared sensor support for generic 24/40/44 key RGB remotes
  */
@@ -726,6 +728,11 @@ void handleIR()
         {
 					if (!pinManager.isPinAllocated(hardwareTX) || pinManager.getPinOwner(hardwareTX) == PinOwner::DebugOut) // Serial TX pin (GPIO 1 on ESP32 and ESP8266)
           	Serial.printf_P(PSTR("IR recv: 0x%lX\n"), (unsigned long)results.value);
+
+          std::stringstream stream;
+          stream << std::hex << results.value;
+          std::string result( stream.str() );
+          publishMqttCustom(result); // IR code to MQTT          
         }
         decodeIR(results.value);
         irrecv->resume();
