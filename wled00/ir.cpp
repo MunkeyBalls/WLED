@@ -1,4 +1,5 @@
 #include "wled.h"
+#include <sstream>
 
 /*
  * Infrared sensor support for generic 24/40/44 key RGB remotes
@@ -31,6 +32,7 @@ bool decodeIRCustom(uint32_t code)
     case IRCUSTOM_ONOFF : toggleOnOff(); break;
     case IRCUSTOM_MACRO1 : applyPreset(1); break;
 
+    // case DVB_PIRON : publishMqttCustom("DVB_PIRON"); break;
     default: return false;
   }
   if (code != IRCUSTOM_MACRO1) colorUpdated(NOTIFIER_CALL_MODE_BUTTON); //don't update color again if we apply macro, it already does it
@@ -513,6 +515,11 @@ void handleIR()
           Serial.print("IR recv\r\n0x");
           Serial.println((uint32_t)results.value, HEX);
           Serial.println();
+
+          std::stringstream stream;
+          stream << std::hex << results.value;
+          std::string result( stream.str() );
+          publishMqttCustom(result); // IR code to MQTT          
         }
         decodeIR(results.value);
         irrecv->resume();

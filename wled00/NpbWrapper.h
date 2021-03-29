@@ -26,7 +26,7 @@
 #endif
 
 #ifndef IRPIN
-#define IRPIN  4  //infrared pin (-1 to disable)  MagicHome: 4, H801 Wifi: 0
+#define IRPIN  13  //infrared pin (-1 to disable)  MagicHome: 4, H801 Wifi: 0
 #endif
 
 #ifndef RLYPIN

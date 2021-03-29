@@ -4,6 +4,14 @@
 #define IRCUSTOM_ONOFF  0xA55AEA15 //Pioneer RC-975R "+FAV" button (example)
 #define IRCUSTOM_MACRO1 0xFFFFFFFF //placeholder, will never be checked for
 
+//TV Codes
+#define TV_POWER 0x4B36D32C //POWER on TV
+
+// DTB
+#define DVB_PIRON 0xFF3AC5 //+ on DTB 
+#define DVB_PIROFF 0xFFBA45 //- on DTB
+#define DVB_WAKE 0xFF02FD //POWER on DTB
+
 // Default IR codes for 6-key learning remote https://www.aliexpress.com/item/4000307837886.html
 // This cheap remote has the advantage of being more powerful (longer range) than cheap credit-card remotes
 #define IR6_POWER        0xFF0FF0

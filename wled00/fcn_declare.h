@@ -124,6 +124,7 @@ void parseLxJson(int lxValue, byte segId, bool secondary);
 //mqtt.cpp
 bool initMqtt();
 void publishMqtt();
+void publishMqttCustom(std::string irButton);
 
 //ntp.cpp
 void handleNetworkTime();
